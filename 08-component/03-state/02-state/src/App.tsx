@@ -6,15 +6,20 @@ type State = { count: number };
 
 class App extends Component<unknown, State> {
   constructor(props: unknown) {
+    // TypeScript の解釈では『null 以外の あらゆるオブジェクト』になってしまうため、
+    // @typescript-eslint/ban-types188 のルールで使用が禁じられてるの。
+    // だからプロパティを持てないオブジェクトの型である unknown がここではよりふさわしい
     super(props);
     this.state = { count: 0 };
   }
 
-  reset(): void {
+  reset = (): void => {
+    // reset(): void {
     this.setState({ count: 0 });
   }
 
-  increment(): void {
+  increment = (): void => {
+    // increment(): void {
     this.setState((state) => ({ count: state.count + 1 }));
   }
 
@@ -33,10 +38,13 @@ class App extends Component<unknown, State> {
           </Statistic>
           <Card.Content>
             <div className="ui two buttons">
-              <Button color="red" onClick={() => this.reset()}>
+              <Button color="red" onClick={this.reset}>
+              {/* <Button color="red" onClick={() => this.reset()}> */}
                 Reset
               </Button>
-              <Button color="green" onClick={() => this.increment()}>
+              <Button color="green" onClick={this.increment}>
+              {/* <Button color="green" onClick={() => this.increment()}> */}
+
                 +1
               </Button>
             </div>
