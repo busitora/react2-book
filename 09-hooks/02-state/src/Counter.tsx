@@ -4,8 +4,13 @@ import './Counter.css';
 
 const Counter: FC = () => {
   const [count, setCount] = useState(0);
+  console.log(count);
+  console.log("------------");
+  console.log(setCount);
   const increment = () => setCount((c) => c + 1);
   const reset = () => setCount(0);
+
+
 
   return (
     <Card>

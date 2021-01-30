@@ -7,6 +7,11 @@ type State = { timeLeft: number };
 
 class App extends Component<unknown, State> {
   timerId: NodeJS.Timer | null = null;
+  // LIMITを 60に
+  // レンダリングされた直後に、 componentDidMount が呼ばれるので、1秒毎にtickメソッドが呼ばれる
+  // tickでは、 stateに入っている値位から -1 している?
+  // componentDidUpdate で、 stateの値を常時変化させ、残り0秒になったらリセット
+  // reset関数が呼ばれて、stateの値が LIMITに戻る。
 
   constructor(props: unknown) {
     super(props);
@@ -15,15 +20,19 @@ class App extends Component<unknown, State> {
 
   componentDidMount = (): void => {
     this.timerId = setInterval(this.tick, 1000);
+    console.log(this.timerId);
+    console.log('コンポーネントのマウント後');
   };
 
   componentDidUpdate = (): void => {
     const { timeLeft } = this.state;
     if (timeLeft === 0) this.reset();
+    console.log('コンポーネントがアップデートされた後');
   };
 
   componentWillUnmount = (): void => {
     if (this.timerId) clearInterval(this.timerId);
+    console.log('コンポーネントがアンマウントされた後');
   };
 
   tick = (): void =>

@@ -11,6 +11,7 @@ const Timer: FC<TimerProps> = ({ limit }) => {
   const [timeLeft, setTimeLeft] = useState(limit);
   const primes = useMemo(() => getPrimes(limit), [limit]);
   const reset = () => setTimeLeft(limit);
+  console.log(limit);
   const tick = () => setTimeLeft((t) => t - 1);
 
   useEffect(() => {

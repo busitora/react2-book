@@ -12,7 +12,7 @@ const App: FC = () => {
     },
     {
       id: 2,
-      name: '流川 楓',
+      //   name: '流川 楓',
       grade: 1,
       height: 187,
     },
